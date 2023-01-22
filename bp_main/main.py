@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 
-from bp_main.utils import search_by_title, search_by_release_year
+from bp_main.utils import *
 
 main_blueprint = Blueprint('main_blueprint', __name__)
 
@@ -20,3 +20,15 @@ def page_by_movie(title):
 def page_searching_by_years(first_year, second_year):
     query = search_by_release_year(first_year, second_year)
     return jsonify(query)
+
+
+@main_blueprint.get('/rating/<rating>')
+def page_searching_by_rating(rating):
+    data = search_by_rating(rating)
+    return jsonify(data)
+
+
+@main_blueprint.get('/genre/<genre>')
+def page_by_genre(genre):
+    data = search_by_genre(genre)
+    return jsonify(data)
